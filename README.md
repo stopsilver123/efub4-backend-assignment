@@ -2,7 +2,7 @@
 
 ## 🧩 ERD
 
-[사진]
+[사진] ![ERD](https://github.com/stopsilver123/efub4-backend-assignment/assets/113423425/86afa54a-cf74-49c0-87f9-f1386aebbaa2)
 
 ## 📗 API 문서
 

@@ -43,7 +43,7 @@ public class SignUpRequestDto {
     public Member toEntity(){
         return Member.builder()
                 .email(this.email)
-                .encodedPassword(this.password) //왜 .password(this.password)는 안 되는 건지??
+                .encodedPassword(this.password)
                 .nickname(this.nickname)
                 .university(this.university)
                 .studentId(this.studentId)

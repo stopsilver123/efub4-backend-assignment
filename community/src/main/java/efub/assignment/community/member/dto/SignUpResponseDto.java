@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberResponseDto {
+public class SignUpResponseDto {
     private Long memberId;
     private String email;
     private String nickname;
     private String university;
     private String studentId;
     @Builder
-    public MemberResponseDto(Long memberId, String email, String nickname, String university, String studentId){
+    public SignUpResponseDto(Long memberId, String email, String nickname, String university, String studentId){
         this.memberId = memberId;
         this.email = email;
         this.nickname = nickname;

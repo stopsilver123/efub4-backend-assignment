@@ -8,10 +8,9 @@ import efub.assignment.community.exception.ErrorCode;
 import efub.assignment.community.member.domain.Member;
 import efub.assignment.community.member.service.MemberService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,7 +24,8 @@ public class BoardService {
         Board savedBoard = boardRepository.save(board);
         return savedBoard;
     }
-    @Transactional
+
+    @Transactional(readOnly=true)
     public Board findBoardById(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new EntityNotFoundException("해당 id를 가진 게시판을 찾을 수 없습니다. id =" + boardId));

@@ -73,4 +73,10 @@ public class CommentService {
         }
         commentRepository.delete(comment);
     }
+
+    @Transactional(readOnly = true)
+    public Comment findCommentById(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id = " + commentId));
+    }
 }

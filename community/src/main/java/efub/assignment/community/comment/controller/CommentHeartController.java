@@ -11,17 +11,15 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/boards/{boardId}/posts/{postId}/comments")
 @RequiredArgsConstructor
-public class CommentController {
+public class CommentHeartController {
     private final CommentService commentService;
     private final CommentHeartService commentHeartService;
 
     // 댓글 좋아요 등록
-    @PostMapping("/{commentId}/hearts")
+    @PostMapping("/comments/{commentId}/hearts")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String createCommentHeart(@PathVariable("boardId") final Long boardId,
-                                     @PathVariable("postId") final Long postId,
+    public String createCommentHeart(
                                      @PathVariable("commentId") final Long commentId,
                                      @RequestBody @Valid final AccountInfoRequestDto requestDto) {
         commentHeartService.create(commentId, requestDto);
@@ -29,10 +27,9 @@ public class CommentController {
     }
 
     // 댓글 좋아요 삭제
-    @DeleteMapping("/{commentId}/hearts")
+    @DeleteMapping("/comments/{commentId}/hearts")
     @ResponseStatus(value = HttpStatus.OK)
-    public String deleteCommentHeart(@PathVariable("boardId") final Long boardId,
-                                     @PathVariable("postId") final Long postId,
+    public String deleteCommentHeart(
                                      @PathVariable("commentId") final Long commentId,
                                      @RequestParam("memberId") final Long memberId) {
         commentHeartService.delete(commentId, memberId);

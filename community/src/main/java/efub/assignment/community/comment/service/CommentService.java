@@ -7,6 +7,7 @@ import efub.assignment.community.comment.dto.CommentRequestDto;
 import efub.assignment.community.comment.repository.CommentRepository;
 import efub.assignment.community.member.domain.Member;
 import efub.assignment.community.member.service.MemberService;
+import efub.assignment.community.notification.service.NotificationService;
 import efub.assignment.community.post.domain.Post;
 import efub.assignment.community.post.service.PostService;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +26,7 @@ public class CommentService {
     private final PostService postService;
     private final CommentRepository commentRepository;
     private final BoardService boardService;
+    private final NotificationService notificationService;
 
     public Comment saveComment(Long boardId, Long postId, CommentRequestDto requestDto){
         Member writer = memberService.findMemberById(requestDto.getMemberId());
@@ -38,6 +40,10 @@ public class CommentService {
                 .post(post)
                 .build();
         commentRepository.save(comment);
+
+        String boardName = board.getBoardName();
+        String content = "새로운 댓글이 달렸어요: " + requestDto.getContent();
+        notificationService.createCommentNotification(boardName, content);
 
         return comment;
     }

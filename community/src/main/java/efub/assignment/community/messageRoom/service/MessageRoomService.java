@@ -7,6 +7,7 @@ import efub.assignment.community.messageRoom.dto.MessageRoomListResponseDto;
 import efub.assignment.community.messageRoom.dto.MessageRoomRequestDto;
 import efub.assignment.community.messageRoom.dto.MessageRoomResponseDto;
 import efub.assignment.community.messageRoom.repository.MessageRoomRepository;
+import efub.assignment.community.notification.service.NotificationService;
 import efub.assignment.community.post.domain.Post;
 import efub.assignment.community.post.service.PostService;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,7 +25,7 @@ public class MessageRoomService {
     private final MessageRoomRepository messageRoomRepository;
     public final MemberService memberService;
     public final PostService postService;
-    private Object MessageRoomListResponseDto;
+    private final NotificationService notificationService;
 
     public MessageRoomResponseDto createMessageRoom(MessageRoomRequestDto requestDto){
         Member sender = memberService.findMemberById(requestDto.getSenderId());
@@ -32,6 +33,8 @@ public class MessageRoomService {
         Post post = postService.findPostById(requestDto.getPostId());
         MessageRoom messageRoom = requestDto.toEntity(sender, receiver, post);
         MessageRoom savedMessageRoom = messageRoomRepository.save(messageRoom);
+        notificationService.createMessageRoomNotification();
+
         return MessageRoomResponseDto.from(savedMessageRoom);
     }
 

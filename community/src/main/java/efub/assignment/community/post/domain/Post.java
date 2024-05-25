@@ -4,6 +4,7 @@ import efub.assignment.community.board.domain.Board;
 import efub.assignment.community.comment.domain.Comment;
 import efub.assignment.community.global.entity.BaseTimeEntity;
 import efub.assignment.community.member.domain.Member;
+import efub.assignment.community.messageRoom.domain.MessageRoom;
 import efub.assignment.community.post.dto.post.PostRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -39,6 +40,9 @@ public class Post extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MessageRoom> messageRoomList = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostHeart> postHeartList = new ArrayList<>();

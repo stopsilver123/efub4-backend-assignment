@@ -1,15 +1,9 @@
 package efub.assignment.community.messageRoom.controller;
 
-import efub.assignment.community.board.domain.Board;
-import efub.assignment.community.board.dto.board.BoardRequestDto;
-import efub.assignment.community.board.dto.board.BoardResponseDto;
-import efub.assignment.community.member.service.MemberService;
-import efub.assignment.community.messageRoom.domain.MessageRoom;
 import efub.assignment.community.messageRoom.dto.MessageRoomListResponseDto;
 import efub.assignment.community.messageRoom.dto.MessageRoomRequestDto;
 import efub.assignment.community.messageRoom.dto.MessageRoomResponseDto;
 import efub.assignment.community.messageRoom.service.MessageRoomService;
-import efub.assignment.community.post.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

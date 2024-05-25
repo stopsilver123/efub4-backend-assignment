@@ -66,4 +66,9 @@ public class MessageRoomService {
 
         messageRoomRepository.deleteById(messageRoomId);
     }
+
+    public MessageRoom findById(Long messageRoomId) {
+        return  messageRoomRepository.findById(messageRoomId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 id의 쪽지방이 없습니다."));
+    }
 }

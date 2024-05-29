@@ -38,7 +38,7 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          cd blog
+          cd community
           chmod +x ./gradlew
           ./gradlew build -x test
 
@@ -55,7 +55,7 @@ jobs:
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
             --ignore-hidden-files \
             --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
-            --source ./blog
+            --source ./community
 
       - name: Deploy to AWS EC2 from S3
         run: |

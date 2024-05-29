@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PROJECT_ROOT="/home/ubuntu/efubcommunity"
-JAR_FILE="$PROJECT_ROOT/community-webapp.jar"
+JAR_FILE="$PROJECT_ROOT/blog-webapp.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
 ERROR_LOG="$PROJECT_ROOT/error.log"

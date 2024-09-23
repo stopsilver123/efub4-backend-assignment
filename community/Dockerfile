@@ -12,6 +12,6 @@ ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 
 # Docker 컨테이너가 시작될 때 /app.jar 실행
-#애플리케이션 타임존을 대한민국 서울로 설정
+#애플리케이션 타임존을 대한민국으로 설정
 #ENTRYPOINT : 컨테이너가 생성되고 최초로 실행할 때 항상 수행되는 명령어 지정
 ENTRYPOINT ["java", "-jar", "-Duser.timezone=Asia/Seoul", "/app.jar"]

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/community.main.iml" filepath="$PROJECT_DIR$/.idea/modules/community.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/community.test.iml" filepath="$PROJECT_DIR$/.idea/modules/community.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/efub4-backend-assignment.iml" filepath="$PROJECT_DIR$/.idea/efub4-backend-assignment.iml" />
     </modules>
   </component>

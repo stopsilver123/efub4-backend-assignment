@@ -26,8 +26,8 @@ public class PostService {
     private final BoardService boardService;
 
     public Post createPost(PostRequestDto dto) {
-        Member member = memberService.findMemberById(Long.parseLong(dto.getMemberId()));
-        Board board = boardService.findBoardById(Long.parseLong(dto.getBoardId()));
+        Member member = memberService.findMemberById(dto.getMemberId());
+        Board board = boardService.findBoardById(dto.getBoardId());
         Post post = dto.toEntity(member, board);
         Post savedPost = postRepository.save(post);
         return savedPost;

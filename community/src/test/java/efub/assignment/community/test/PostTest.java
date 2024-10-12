@@ -56,7 +56,7 @@ class PostTest {
     @DisplayName("게시글 수정")
     public void testUpdatePost() {
         String newContent = "사실 우리 학교 근처에는 맛집이 없어요.";
-        PostRequestDto dto = new PostRequestDto(board.getBoardName(), board.getHostNickname(), true, newContent);
+        PostRequestDto dto = new PostRequestDto(board.getBoardId(), member.getMemberId(), true, newContent);
 
         post.update(dto);
 

@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class PostRequestDto {
-    @NotBlank(message = "게시판 ID는 필수입니다.")
-    private String boardId;
+    @NotNull(message = "게시판 ID는 필수입니다.")
+    private Long boardId;
 
-    @NotBlank(message = "계정 ID는 필수입니다.")
-    private String memberId;
+    @NotNull(message = "계정 ID는 필수입니다.")
+    private Long memberId;
 
     @NotNull(message = "익명 여부 설정은 필수입니다.")
     private Boolean anonymous;

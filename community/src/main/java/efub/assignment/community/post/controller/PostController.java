@@ -27,7 +27,8 @@ public class PostController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public PostResponseDto createPost(@RequestBody @Valid final PostRequestDto dto) {
         Post savedPost = postService.createPost(dto);
-        return PostResponseDto.from(savedPost);
+        String writerNickname = savedPost.getMember().getNickname();
+        return PostResponseDto.from(savedPost, writerNickname);
     }
     //게시글 전체 조회
     @GetMapping
@@ -35,7 +36,8 @@ public class PostController {
         List<PostResponseDto> list = new ArrayList<>();
         List<Post> posts = postService.findAllPosts();
         for (Post post : posts) {
-            PostResponseDto dto = PostResponseDto.from(post);
+            String writerNickname = post.getMember().getNickname();  // 게시글 작성자의 닉네임
+            PostResponseDto dto = PostResponseDto.from(post, writerNickname);  // 작성자 닉네임을 전달
             list.add(dto);
         }
 
@@ -47,14 +49,16 @@ public class PostController {
     @GetMapping("/{postId}")
     public PostResponseDto getOnePost(@PathVariable final long postId) {
         Post post = postService.findPostById(postId);
-        return PostResponseDto.from(post);
+        String writerNickname = post.getMember().getNickname();
+        return PostResponseDto.from(post, writerNickname);
     }
     //게시글 수정
     @PutMapping("/{postId}")
     public PostResponseDto updatePost(@PathVariable final long postId, @RequestBody @Valid final PostRequestDto dto) {
         Long id = postService.updatePost(postId, dto);
         Post post = postService.findPostById(id);
-        return PostResponseDto.from(post);
+        String writerNickname = post.getMember().getNickname();
+        return PostResponseDto.from(post, writerNickname);
     }
     //게시글 삭제
     @DeleteMapping("/{postId}")
@@ -78,4 +82,14 @@ public class PostController {
         postHeartService.delete(memberId, boardId, postId);
         return "좋아요가 취소되었습니다.";
     }
+
+    //게시글 검색
+    @GetMapping("/search")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<PostResponseDto> searchPost(@RequestParam(value = "content", required = false) final String content,
+                                            @RequestParam(value = "writer", required = false) final String writerNickname,
+                                            @RequestParam(value = "boardName", required = false) final String boardName) {
+        return postService.searchPost(content, writerNickname, boardName);
+    }
+
 }

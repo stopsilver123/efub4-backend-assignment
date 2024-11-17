@@ -9,6 +9,7 @@ import efub.assignment.community.member.domain.Member;
 import efub.assignment.community.member.service.MemberService;
 import efub.assignment.community.post.domain.Post;
 import efub.assignment.community.post.dto.post.PostRequestDto;
+import efub.assignment.community.post.dto.post.PostResponseDto;
 import efub.assignment.community.post.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -65,5 +67,12 @@ public class PostService {
             throw new CustomDeleteException(ErrorCode.PERMISSION_REJECTED_USER);
         }
         postRepository.delete(post);
+    }
+
+    public List<PostResponseDto> searchPost(String content, String writerNickname, String boardName) {
+        List<Post> posts = postRepository.search(content, writerNickname, boardName);
+        return posts.stream()
+                .map(post -> PostResponseDto.from(post, writerNickname))  // writerNickname을 넘겨서 처리
+                .collect(Collectors.toList());
     }
 }

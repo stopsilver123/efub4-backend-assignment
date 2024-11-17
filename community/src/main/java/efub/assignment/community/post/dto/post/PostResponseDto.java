@@ -20,8 +20,11 @@ public class PostResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public static PostResponseDto from(Post post) {
-        String writerName = post.isAnonymous() ? "익명" : post.getMember().getNickname();
+    public static PostResponseDto from(Post post, String writerNickname) {
+        String writerName = (writerNickname != null && !writerNickname.isEmpty())
+                ? writerNickname
+                : (post.isAnonymous() ? "익명" : post.getMember().getNickname());
+
         return new PostResponseDto(
                 post.getBoard().getBoardId(),
                 post.getPostId(),
